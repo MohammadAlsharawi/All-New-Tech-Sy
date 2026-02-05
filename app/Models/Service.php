@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Service extends Model
 {
+    use HasTranslations;
     protected $fillable = [
         'image',
         'title',
@@ -14,6 +16,11 @@ class Service extends Model
         'advantages'
     ];
 
+    public array $translatable = [
+        'title',
+        'description',
+        'advantages',
+    ];
     protected $casts = [
         'advantages' => 'array',
     ];

@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Company extends Model
 {
+    use HasTranslations;
     protected $fillable = [
         'name',
         'logo',
         'priority',
     ];
+    public array $translatable = ['name'];
 }

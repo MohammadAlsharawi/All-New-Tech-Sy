@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 
 class Project extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, HasTranslations;
 
     protected $fillable = [
         'title',
@@ -17,6 +18,12 @@ class Project extends Model implements HasMedia
         'solutions',
         'service_id',
         'property_type_id',
+    ];
+    public array $translatable = [
+        'title',
+        'description',
+        'challenges',
+        'solutions'
     ];
     protected $casts = [
         'challenges' => 'array',

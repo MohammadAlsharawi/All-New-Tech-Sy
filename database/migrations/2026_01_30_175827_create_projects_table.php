@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
+            $table->json('title');
+            $table->json('description');
             $table->json('challenges')->nullable();
             $table->json('solutions')->nullable();
             $table->foreignId('service_id')->constrained()->cascadeOnDelete();
