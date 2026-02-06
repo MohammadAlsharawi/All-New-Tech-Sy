@@ -22,8 +22,6 @@ class Project extends Model implements HasMedia
     public array $translatable = [
         'title',
         'description',
-        'challenges',
-        'solutions'
     ];
     protected $casts = [
         'challenges' => 'array',

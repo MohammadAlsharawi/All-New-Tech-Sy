@@ -25,9 +25,13 @@ class ReviewForm
                 TextInput::make('rating')
                     ->required()
                     ->numeric(),
-                Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
+                TextInput::make('description.en')
+                    ->label('Description (EN)')
+                    ->required(),
+
+                TextInput::make('description.ar')
+                    ->label('Description (AR)')
+                    ->required(),
             ]);
     }
 }

@@ -27,7 +27,11 @@ class ReviewInfolist
                     })
                     ->html(),
 
-                TextEntry::make('description'),
+                TextEntry::make('description')
+                    ->label(__('Description'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('description', app()->getLocale())
+                    ),
                 TextEntry::make('created_at')
                     ->dateTime(),
                 TextEntry::make('updated_at')

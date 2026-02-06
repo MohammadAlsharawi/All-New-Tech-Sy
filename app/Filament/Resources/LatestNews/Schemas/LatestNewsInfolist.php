@@ -16,8 +16,16 @@ class LatestNewsInfolist
                 ->square()
                 ->size(300)
                 ->disk('public'),
-                TextEntry::make('title'),
-                TextEntry::make('content'),
+                TextEntry::make('title')
+                    ->label(__('Title'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('title', app()->getLocale())
+                    ),
+                TextEntry::make('content')
+                    ->label(__('Content'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('content', app()->getLocale())
+                    ),
                 TextEntry::make('created_at')
                     ->dateTime(),
                 TextEntry::make('updated_at')

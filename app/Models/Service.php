@@ -19,7 +19,6 @@ class Service extends Model
     public array $translatable = [
         'title',
         'description',
-        'advantages',
     ];
     protected $casts = [
         'advantages' => 'array',

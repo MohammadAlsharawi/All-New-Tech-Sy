@@ -28,6 +28,10 @@ class LatestNewsTable
                     ->size(80)
                     ->disk('public'),
                 TextColumn::make('title')
+                    ->label(__('Title'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('title', app()->getLocale())
+                    )
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

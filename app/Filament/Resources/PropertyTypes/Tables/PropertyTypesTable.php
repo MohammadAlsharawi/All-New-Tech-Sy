@@ -21,6 +21,10 @@ class PropertyTypesTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('Name'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('name', app()->getLocale())
+                    )
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

@@ -24,22 +24,36 @@ class ServiceForm
                     ->imagePreviewHeight('250')
                     ->downloadable()
                     ->openable(),
-                TextInput::make('title')
+                TextInput::make('title.en')
+                    ->label('Title (EN)')
                     ->required(),
-                Textarea::make('description')
+
+                TextInput::make('title.ar')
+                    ->label('Title (AR)')
+                    ->required(),
+
+                Textarea::make('description.en')
+                    ->label('Description (EN)')
                     ->required()
                     ->columnSpanFull(),
-                Repeater::make('advantages')
-                    ->label('Advantages')
-                    ->schema([
-                        TextInput::make('item')
-                            ->label('Advantage')
-                            ->required(),
-                    ])
-                    ->minItems(1)
-                    ->defaultItems(1)
-                    ->addActionLabel('Add Advantage')
+
+                Textarea::make('description.ar')
+                    ->label('Description (AR)')
+                    ->required()
                     ->columnSpanFull(),
+
+            Repeater::make('advantages')
+                ->label('Advantages')
+                ->schema([
+                    TextInput::make('en')
+                        ->label('English')
+                        ->required(),
+                    TextInput::make('ar')
+                        ->label('Arabic')
+                        ->required(),
+                ])
+                ->columnSpanFull()
+                ->minItems(1),
 
                 Select::make('property_type_id')
                     ->label('Property Type')

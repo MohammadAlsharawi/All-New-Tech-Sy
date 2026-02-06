@@ -20,11 +20,18 @@ class ProjectsTable
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->searchable()
-                    ->sortable(),
+                    ->label(__('Title'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('title', app()->getLocale())
+                    )
+                    ->searchable(),
                 TextColumn::make('description')
+                    ->label(__('Description'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('description', app()->getLocale())
+                    )
                     ->searchable()
-                    ->sortable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('service.title')
                     ->label('Service')

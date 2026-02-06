@@ -28,10 +28,19 @@ class ServicesTable
                     ->size(80)
                     ->disk('public'),
                 TextColumn::make('title')
+                    ->label(__('Title'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('title', app()->getLocale())
+                    )
                     ->searchable(),
                 TextColumn::make('description')
-                ->searchable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->label(__('Description'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('description', app()->getLocale())
+                    )
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('propertyType.name')
                     ->label('Property Type')
                     ->sortable()

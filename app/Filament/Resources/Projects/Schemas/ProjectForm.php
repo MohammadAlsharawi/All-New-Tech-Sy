@@ -16,42 +16,49 @@ class ProjectForm
     {
         return $schema
             ->components([
-                TextInput::make('title')
+                TextInput::make('title.en')
+                    ->label('Title (EN)')
                     ->required(),
 
-                Textarea::make('description')
+                TextInput::make('title.ar')
+                    ->label('Title (AR)')
+                    ->required(),
+
+                Textarea::make('description.en')
+                    ->label('Description (EN)')
                     ->required()
                     ->columnSpanFull(),
 
-                // ========================
-                // Challenges - JSON Points
-                // ========================
-                Repeater::make('challenges')
-                    ->label('Challenges')
-                    ->schema([
-                        TextInput::make('item')
-                            ->label('Challenge Point')
-                            ->required(),
-                    ])
-                    ->minItems(1)
-                    ->defaultItems(1)
-                    ->columnSpanFull()
-                    ->required(),
+                Textarea::make('description.ar')
+                    ->label('Description (AR)')
+                    ->required()
+                    ->columnSpanFull(),
 
-                // ========================
-                // Solutions - JSON Points
-                // ========================
+            Repeater::make('challenges')
+                ->label('Challenges')
+                ->schema([
+                    TextInput::make('en')
+                        ->label('English')
+                        ->required(),
+                    TextInput::make('ar')
+                        ->label('Arabic')
+                        ->required(),
+                ])
+                ->columnSpanFull()
+                ->minItems(1),
+                
                 Repeater::make('solutions')
-                    ->label('Solutions')
-                    ->schema([
-                        TextInput::make('item')
-                            ->label('Solution Point')
-                            ->required(),
-                    ])
-                    ->minItems(1)
-                    ->defaultItems(1)
-                    ->columnSpanFull()
-                    ->required(),
+                ->label('Solutions')
+                ->schema([
+                    TextInput::make('en')
+                        ->label('English')
+                        ->required(),
+                    TextInput::make('ar')
+                        ->label('Arabic')
+                        ->required(),
+                ])
+                ->columnSpanFull()
+                ->minItems(1),
 
                 // ========================
                 // Relationships with name
@@ -74,7 +81,7 @@ class ProjectForm
                     ->searchable()
                     ->preload()
                     ->required(),
-                    
+
                 // ========================
                 // Media Library Upload
                 // ========================

@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Widgets\DashboardStats;
+use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Filament\Auth\Pages\EditProfile;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -59,5 +60,13 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+    public function boot()
+    {
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['ar','en']);
+        });
+
     }
 }

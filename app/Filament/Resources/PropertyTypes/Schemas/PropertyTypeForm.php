@@ -11,7 +11,12 @@ class PropertyTypeForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
+                TextInput::make('name.en')
+                    ->label('Name (EN)')
+                    ->required(),
+
+                TextInput::make('name.ar')
+                    ->label('Name (AR)')
                     ->required(),
             ]);
     }
