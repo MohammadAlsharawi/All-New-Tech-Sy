@@ -12,7 +12,11 @@ class CompanyInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
+                TextEntry::make('name')
+                    ->label(__('Company Name'))
+                    ->getStateUsing(fn ($record) =>
+                        $record->getTranslation('name', app()->getLocale())
+                            ),
                 ImageEntry::make('logo')
                 ->square()
                 ->size(300)

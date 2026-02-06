@@ -23,7 +23,11 @@ class CompaniesTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
+                ->label(__('Challenge Name'))
+                ->getStateUsing(fn ($record) =>
+                    $record->getTranslation('name', app()->getLocale())
+                )
+                ->searchable(),
                 ImageColumn::make('logo')
                     ->square()
                     ->circular()

@@ -12,7 +12,11 @@ class CompanyForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
+                TextInput::make('name.en')
+                    ->label('Company name (EN)')
+                    ->required(),
+                TextInput::make('name.ar')
+                    ->label('Company name (AR)')
                     ->required(),
                 FileUpload::make('logo')
                     ->required()
