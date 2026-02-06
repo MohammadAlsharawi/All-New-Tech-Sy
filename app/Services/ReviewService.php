@@ -13,7 +13,7 @@ class ReviewService
             return Review::all()->map(function ($update) {
                 return [
                     'id'          => $update->id,
-                    'description' => $update->description,
+                    'description' => $update->getTranslation('description', app()->getLocale()),
                     'rating'      => $update->rating,
                     'user_image'  => Storage::disk('public')->url($update->user_image),
                     'created_at'  => $update->created_at,
@@ -31,7 +31,7 @@ class ReviewService
 
             return [
                 'id'          => $review->id,
-                'description' => $review->description,
+                'description' => $review->getTranslation('description', app()->getLocale()),
                 'rating'      => $review->rating,
                 'user_image'  => Storage::disk('public')->url($review->user_image),
                 'created_at'  => $review->created_at,

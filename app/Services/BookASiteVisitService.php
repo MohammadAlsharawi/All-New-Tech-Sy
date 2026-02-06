@@ -13,24 +13,31 @@ class BookASiteVisitService
     public function getFormData()
     {
         try {
+
+            $locale = app()->getLocale();
+
             return [
                 'services' => Service::all()->map(fn ($item) => [
                     'id'   => $item->id,
-                    'name' => $item->title,
+                    'name' => $item->getTranslation('title', $locale),
                 ]),
+
                 'propertyType' => PropertyType::all()->map(fn ($item) => [
                     'id'   => $item->id,
-                    'name' => $item->name,
+                    'name' => $item->getTranslation('name', $locale),
                 ]),
-                'preferredContactMethod' => PreferredTime::all()->map(fn ($item) => [
+
+                'preferredTime' => PreferredTime::all()->map(fn ($item) => [
                     'id'   => $item->id,
-                    'name' => $item->name,
+                    'name' => $item->time,
                 ]),
             ];
+
         } catch (\Exception $e) {
-            return $e->getMessage();
+            throw new \Exception("Failed to load form data: " . $e->getMessage());
         }
     }
+
     public function store($data){
         try{
             $SiteVisit = SiteVisit::create($data);

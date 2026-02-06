@@ -13,8 +13,8 @@ class LatestNewsService
             return LatestNews::all()->map(function ($update) {
                 return [
                     'id'          => $update->id,
-                    'title'       => $update->title,
-                    'content'     => $update->content,
+                    'title'       => $update->getTranslation('title', app()->getLocale()),
+                    'content'     => $update->getTranslation('content', app()->getLocale()),
                     'image'       => Storage::disk('public')->url($update->image),
                     'created_at'  => $update->created_at,
                     'updated_at'  => $update->updated_at,

@@ -15,14 +15,17 @@ class ServiceService
         if ($propertyTypeId) {
             $query->where('property_type_id', $propertyTypeId);
         }
-
-        return $query->get()->map(function ($service) {
+        $locale = app()->getLocale();
+        return $query->get()->map(function ($service) use ($locale) {
             return [
                 'id'               => $service->id,
-                'title'            => $service->title,
-                'description'      => $service->description,
+                'title'            => $service->getTranslation('title', app()->getLocale()),
+                'description'      => $service->getTranslation('description', app()->getLocale()),
                 'property_type'    => $service->propertyType?->name,
-                'advantages'       => $service->advantages,
+                'advantages'       => collect($service->getAttributeValue('advantages') ?? [])
+                                        ->pluck($locale)
+                                        ->values()
+                                        ->toArray(),
                 'created_at'       => $service->created_at,
                 'updated_at'       => $service->updated_at,
             ];
@@ -31,5 +34,18 @@ class ServiceService
             throw new \Exception("Failed to retrieve services: " . $e->getMessage());
         }
     }
+    private function mapAdvantagesByLocale($advantages)
+    {
+        if (empty($advantages) || !is_array($advantages)) {
+            return [];
+        }
+
+        $locale = app()->getLocale();
+
+        return collect($advantages)->map(function ($item) use ($locale) {
+            return $item[$locale] ?? null;
+        })->filter()->values()->toArray();
+    }
+
 }
 
