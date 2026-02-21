@@ -26,6 +26,7 @@ class ServiceService
                                         ->pluck($locale)
                                         ->values()
                                         ->toArray(),
+                'image'           => Storage::disk('public')->url($service->image),
                 'created_at'       => $service->created_at,
                 'updated_at'       => $service->updated_at,
             ];
