@@ -4,6 +4,7 @@ use App\Http\Controllers\API\BookASiteVisitController;
 use App\Http\Controllers\API\CompaniesController;
 use App\Http\Controllers\API\ContactUsController;
 use App\Http\Controllers\API\LatestNewsController;
+use App\Http\Controllers\API\LocationController;
 use App\Http\Controllers\API\ProjectController;
 use App\Http\Controllers\API\RequestAQuoteController;
 use App\Http\Controllers\API\ReviewController;
@@ -50,3 +51,6 @@ Route::prefix('projects')->group(function () {
     Route::get('/{id}', [ProjectController::class, 'show']);
 
 });
+
+//locations
+Route::get('/locations', [LocationController::class, 'index']);
